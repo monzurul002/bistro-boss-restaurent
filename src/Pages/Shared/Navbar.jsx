@@ -26,7 +26,7 @@ const Navbar = () => {
         <li className=" ">
             <Link to="/" >
                 <FaCartShopping className="text-2xl mr-[-9px]" />
-                <div className="p-1 rounded-lg badge-secondary  mb-3">+99</div>
+                <div className="p-1 rounded-lg badge-secondary mt-[-25px] ">+99</div>
             </Link>
         </li>
         {
