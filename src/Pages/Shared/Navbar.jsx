@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { FaCartShopping } from "react-icons/fa6";
+import useCart from "../../hooks/useCart";
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    console.log(user);
+    const [cart] = useCart()
+    console.log(cart);
     const handleLogOut = () => {
         logOut()
             .then(() => {
                 Swal.fire({
                     title: "Log out succesfully",
-
                     icon: "success"
                 });
             })
@@ -24,9 +25,9 @@ const Navbar = () => {
         <li><Link to="/menu">Our Menu</Link></li>
         <li><Link to="/order/salad">Order</Link></li>
         <li className=" ">
-            <Link to="/" >
+            <Link to="/dashboard/mycart" >
                 <FaCartShopping className="text-2xl mr-[-9px]" />
-                <div className="p-1 rounded-lg badge-secondary mt-[-25px] ">+99</div>
+                <div className="p-1 rounded-lg badge-secondary mt-[-25px] ">+{cart?.length}</div>
             </Link>
         </li>
         {

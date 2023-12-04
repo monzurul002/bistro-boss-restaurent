@@ -15,16 +15,29 @@ const SignUp = () => {
         createNewUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-
+                console.log(user);
                 if (user) {
                     profileUpdate(data.name, data.photoUrl)
                         .then(result => {
-                            reset()
-                            Swal.fire({
-                                title: "succesfully created user.",
-                                icon: "success"
-                            });
-                            navigate("/")
+                            const savedUser = { name: data.name, email: data.email }
+                            fetch("http://localhost:5000/users", {
+                                method: "POST",
+                                headers: {
+                                    "Content-type": "application/json"
+                                },
+                                body: JSON.stringify(savedUser)
+                            }).then(res => res.json())
+                                .then(data => {
+                                    if (data.insertedId) {
+                                        reset()
+                                        Swal.fire({
+                                            title: "succesfully created user.",
+                                            icon: "success"
+                                        });
+                                        navigate("/")
+                                    }
+                                })
+
                         })
                         .then(error => {
 

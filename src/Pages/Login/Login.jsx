@@ -6,6 +6,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha, LoadCanvasTemp
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
     const emailRef = useRef();
@@ -35,8 +36,6 @@ const Login = () => {
             .catch(error => {
                 setError(error.message)
             })
-        console.log("object");
-
     }
 
     const captchaValidate = (e) => {
@@ -100,6 +99,7 @@ const Login = () => {
                         </div>
                     </form>
                     <p className="text-center mt-[-20px] mb-2"><small>New here? <Link className="link text-cyan-800" to="/signup">SignUp</Link></small></p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

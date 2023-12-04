@@ -7,10 +7,13 @@ const useCart = () => {
     const { isLoading, refetch, data: cart = [], error } = useQuery({
         queryKey: ['carts', user?.email], queryFn: async () => {
             const res = await fetch(`http://localhost:5000/carts?email=${user?.email}`);
-            res.json()
+            return res.json()
         }
     })
+
+
     return [cart, isLoading, refetch]
 };
 
 export default useCart;
+
