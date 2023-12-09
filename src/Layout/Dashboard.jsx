@@ -3,10 +3,13 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaHome, FaRegCalendarAlt } from "react-icons/fa";
 import { IoMenuSharp } from "react-icons/io5";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     const [cart] = useCart()
-    const isAdmin = true;
+    const { isAdmin } = useAdmin();
+
+
     return (
         <div>
             <div className="drawer lg:drawer-open ">
@@ -25,16 +28,16 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 min-h-full ">
                         {
                             isAdmin ? <>
-                                <li><NavLink to="/dashboard/home">
+                                <li><NavLink to="/dashboard/adminhome">
                                     <FaHome /> Admin Home </NavLink></li>
-                                <li><NavLink to="/"><FaUtensils></FaUtensils>  Add Items</NavLink></li>
-                                <li><NavLink to=""><FaWallet />Manage Items </NavLink></li>
-                                <li><NavLink to=""><FaBook />Manage Books </NavLink></li>
+                                <li><NavLink to="/dashboard/additem"><FaUtensils></FaUtensils>  Add Items</NavLink></li>
+                                <li><NavLink to="/dashboard/manageitems"><FaWallet />Manage Items </NavLink></li>
+                                <li><NavLink to="/dashboard/mycart"><FaBook />Manage Books </NavLink></li>
                                 <li><NavLink to="/dashboard/allusers"><FaUsers />All Users </NavLink></li>
 
 
                             </> : <>
-                                <li><NavLink to="/dashboard/home"><FaHome /> User Home </NavLink></li>
+                                <li><NavLink to="/dashboard/userhome"><FaHome /> User Home </NavLink></li>
                                 <li><NavLink to="/dashboard/reservation"><FaRegCalendarAlt /> Reservation </NavLink></li>
                                 <li><NavLink to="/dashboard/history"><FaWallet />Payment History </NavLink></li>
                                 <li >

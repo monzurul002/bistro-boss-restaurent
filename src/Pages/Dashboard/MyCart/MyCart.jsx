@@ -4,11 +4,13 @@ import { AiFillDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { Query } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
-    const [cart, refetch] = useCart();
+    const [cart, , refetch] = useCart();
+
     const price = cart.reduce((pr, curr) => {
-        return parseInt(pr + curr.price)
+        return parseFloat(pr + curr.price)
     }, 0);
 
     const handleDelete = (item) => {
@@ -27,7 +29,7 @@ const MyCart = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.deletedCount > 0) {
-
+                            refetch()
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
@@ -56,7 +58,7 @@ const MyCart = () => {
                 <h1 className="text-3xl">
                     Total Price: ${price}
                 </h1>
-                <button className="btn btn-warning">Pay</button>
+                <Link to="/dashboard/payment"><button className="btn btn-warning">Pay</button></Link>
             </div>
             <div className="overflow-x-auto px-10">
                 <table className="table">

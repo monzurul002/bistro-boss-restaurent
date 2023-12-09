@@ -13,9 +13,9 @@ const Order = () => {
     const { category } = useParams()
     const initialIndex = categories.indexOf(category)
     const [tabIndex, setTabIndex] = useState(initialIndex);
-    const [menu, loading] = useMenu();
-
-    if (loading) {
+    const [menu, isLoading] = useMenu();
+    console.log(menu, "form order");
+    if (isLoading) {
         return <h2>Loading</h2>
     }
 
